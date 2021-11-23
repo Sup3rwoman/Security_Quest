@@ -22,6 +22,8 @@ class MySecurityConfig extends WebSecurityConfigurerAdapter {
                     .hasRole("HEROE")
                 .antMatchers("/secret-bases")
                     .hasRole("DIRECTOR")
+                .antMatchers("/api/secret-bases")
+                    .hasRole("DIRECTOR")
                 .anyRequest().authenticated()
                 .and()
                 //specify that authentication should done through a login form
