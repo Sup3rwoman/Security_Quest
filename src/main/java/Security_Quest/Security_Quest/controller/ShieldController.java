@@ -1,10 +1,10 @@
 package Security_Quest.Security_Quest.controller;
 
+import Security_Quest.Security_Quest.entity.CityDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -20,10 +20,16 @@ public class ShieldController {
             return "Avengers..... Assemble";
         }
 
-        @GetMapping("/secret-bases")
-        public String directors() {
-            List<String> cities = new ArrayList<>(Arrays.asList("Amsterdam", "Barcelona", "Berlin", "Brüssel", "Bukarest", "Lissabon", "London","Madrid"));
-            return cities.toString();
-        }
+    @GetMapping("/api/secret-bases")
+    public List<CityDTO> directors() {
+        //List<String> cities = Arrays.asList("Amsterdam", "Barcelona", "Berlin", "Brüssel", "Bukarest", "Lissabon", "London","Madrid");
+        List<CityDTO> cities = new ArrayList<>();
+        cities.add(new CityDTO("Amsterdam"));
+        cities.add(new CityDTO("Barcelona"));
+
+        return cities;
+
+    }
+
     }
 

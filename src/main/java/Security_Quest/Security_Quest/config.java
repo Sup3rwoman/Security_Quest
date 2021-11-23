@@ -23,16 +23,18 @@ class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/secret-bases")
                     .hasRole("DIRECTOR")
                 .anyRequest().authenticated()
-
                 .and()
                 //specify that authentication should done through a login form
                 .formLogin()
                 .and()
                 //basic HTTP authentication
-                .httpBasic();
+                .httpBasic()
+                .and()
+                //If user has no access to a specific page, he will be redirected to the accessDenied.html template
+                .exceptionHandling().accessDeniedPage("/accessDenied.html");
     }
 
-    //Set own password ("password") and associate it with an id ("user")
+    //Set own password (example: "password") and associate it with an id (example: "user")
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -50,5 +52,4 @@ class MySecurityConfig extends WebSecurityConfigurerAdapter {
                     .password(encoder.encode("director"))
                     .roles("DIRECTOR");
     }
-
 }
